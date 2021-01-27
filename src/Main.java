@@ -19,11 +19,8 @@ public class Main {
 			System.out.println("2. Study a Deck");
 			System.out.println("3. Quit");
 			
-			//get input for next screen
-			char menuInput = WaitForAnswer(new char[] { '1', '2', '3' }, "");
-			
 			//loop through and run code for the option that they chose
-			switch(menuInput) {
+			switch(WaitForAnswer(new char[] { '1', '2', '3' }, "")) {
 				case '1':
 					CreateDeck();
 					break;
