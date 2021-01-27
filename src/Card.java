@@ -20,4 +20,12 @@ public class Card {
 		else
 			return back;
 	}
+	
+	public void print() {
+		System.out.println("");
+		System.out.println("");
+		System.out.println("-----------------------------");
+		System.out.println(read());
+		System.out.println("-----------------------------");
+	}
 }

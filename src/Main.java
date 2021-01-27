@@ -154,12 +154,7 @@ public class Main {
 			boolean stayOnCard=true;
 			while(stayOnCard) {
 				
-				//ouput card and options
-				System.out.println("");
-				System.out.println("");
-				System.out.println("-----------------------------");
-				System.out.println(cards.get(i).read());
-				System.out.println("-----------------------------");
+				cards.get(i).print();
 				char cardInput = WaitForAnswer(new char[] {'f', 'F', 'n', 'N' }, "To flip type: F. To go to the next card, type: N.");
 				
 				if(cardInput == 'n' || cardInput == 'N') {
