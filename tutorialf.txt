@@ -1,0 +1,3 @@
+To flip a card, type f
+This is the second card. Type f to flip again
+This is the last card. I guess you've gotten the hang of it!

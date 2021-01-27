@@ -1,0 +1,3 @@
+This is now the back of the card. Type 'n' to go to the next
+You can also flip back to the front. Try that now. When you're ready go to the next card.
+enjoy using this program!
