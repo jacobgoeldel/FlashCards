@@ -1,55 +1,40 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 public class CardsManager {
-	private String[] cardFirstSides;
-	private String[] cardSecondSides;
-	private boolean currentSide = true;
+	private ArrayList<Card> cards;
 	
 	//sets the card arrays equal to the given arrays
 	public void InitCards(String[] firstSideCards, String[] secondSideCards) {
-		cardFirstSides = firstSideCards;
-		cardSecondSides = secondSideCards;
+		cards = new ArrayList<Card>();
+		for(int i = 0; i < firstSideCards.length; i++)
+			cards.add(new Card(firstSideCards[i], secondSideCards[i]));
 	}
 	
 	//reads the current side of a card
 	public String ReadCard(int cardID) {
-		if(currentSide) {
-			return cardFirstSides[cardID];
-		} else {
-			return cardSecondSides[cardID];
-		}
+		return cards.get(cardID).read();
 	}
 	
 	public int CardCount() {
-		return cardFirstSides.length;
+		return cards.size();
 	}
 	
-	public void flipCard() {
-		currentSide = !currentSide;
-	}
-	
-	public boolean GetCurrentSide() {
-		return currentSide;
+	public void flipCard(int cardID) {
+		cards.get(cardID).flip();
 	}
 	
 	public void ShuffleCards() {
 		Random rndm = new Random();
 		//run the shuffle for the number of cards in the deck, so every card will be shuffled
 		//at least once
-		for(int i = 0; i < cardFirstSides.length; i++) {
-			//create temp vals of both arrays as to 
-			//not mix up which answer is with which question
-			int randPos = rndm.nextInt(cardFirstSides.length);
-			String tempValF = cardFirstSides[i];
-			String tempValS = cardSecondSides[i];
+		for(int i = 0; i < cards.size(); i++) {
+			int randPos = rndm.nextInt(cards.size());
+			Card temp = cards.get(i);
 			
-			//swap the first card
-			cardFirstSides[i] = cardFirstSides[randPos];
-			cardSecondSides[i] = cardSecondSides[randPos];
-			
-			//swap the second with temp
-			cardFirstSides[randPos] = tempValF;
-			cardSecondSides[randPos] = tempValS;
+			//swap the cards
+			cards.set(i, cards.get(randPos));
+			cards.set(randPos, temp);
 		}
 	}
 }

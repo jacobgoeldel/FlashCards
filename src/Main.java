@@ -143,11 +143,8 @@ public class Main {
 				if(cardInput == 'n' || cardInput == 'N') {
 					//flip to next card
 					stayOnCard = false;
-					if(cardsManager.GetCurrentSide() == false) {
-						cardsManager.flipCard();
-					}
 				} else { //they want to flip
-					cardsManager.flipCard();
+					cardsManager.flipCard(i);
 				}
 			}
 		}
