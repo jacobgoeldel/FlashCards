@@ -2,26 +2,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class CardsManager {
-	private ArrayList<Card> cards;
+	public ArrayList<Card> cards;
 	
 	//sets the card arrays equal to the given arrays
 	public void InitCards(String[] firstSideCards, String[] secondSideCards) {
 		cards = new ArrayList<Card>();
 		for(int i = 0; i < firstSideCards.length; i++)
 			cards.add(new Card(firstSideCards[i], secondSideCards[i]));
-	}
-	
-	//reads the current side of a card
-	public String ReadCard(int cardID) {
-		return cards.get(cardID).read();
-	}
-	
-	public int CardCount() {
-		return cards.size();
-	}
-	
-	public void flipCard(int cardID) {
-		cards.get(cardID).flip();
 	}
 	
 	public void ShuffleCards() {

@@ -128,7 +128,7 @@ public class Main {
 		}
 		
 		//loop through every card in the deck to display the front and back
-		for(int i = 0; i < cardsManager.CardCount(); i++) {
+		for(int i = 0; i < cardsManager.cards.size(); i++) {
 			boolean stayOnCard=true;
 			while(stayOnCard) {
 				
@@ -136,7 +136,7 @@ public class Main {
 				System.out.println("");
 				System.out.println("");
 				System.out.println("-----------------------------");
-				System.out.println(cardsManager.ReadCard(i));
+				System.out.println(cardsManager.cards.get(i).read());
 				System.out.println("-----------------------------");
 				char cardInput = WaitForAnswer(new char[] {'f', 'F', 'n', 'N' }, "To flip type: F. To go to the next card, type: N.");
 				
@@ -144,7 +144,7 @@ public class Main {
 					//flip to next card
 					stayOnCard = false;
 				} else { //they want to flip
-					cardsManager.flipCard(i);
+					cardsManager.cards.get(i).flip();
 				}
 			}
 		}
