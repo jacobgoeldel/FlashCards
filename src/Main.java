@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -6,6 +7,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		boolean keepLooping = true;
+		
 		while(keepLooping) {
 			
 			//output main screen
@@ -36,6 +38,27 @@ public class Main {
 		
 	}
 	
+	public static ArrayList<Card> InitCards(String[] firstSideCards, String[] secondSideCards) {
+		ArrayList<Card> cards = new ArrayList<Card>();
+		for(int i = 0; i < firstSideCards.length; i++)
+			cards.add(new Card(firstSideCards[i], secondSideCards[i]));
+		
+		return cards;
+	}
+	
+	public static void ShuffleCards(ArrayList<Card> cards) {
+		Random rndm = new Random();
+		//run the shuffle for the number of cards in the deck, so every card will be shuffled
+		//at least once
+		for(int i = 0; i < cards.size(); i++) {
+			int randPos = rndm.nextInt(cards.size());
+			Card temp = cards.get(i);
+			
+			//swap the cards
+			cards.set(i, cards.get(randPos));
+			cards.set(randPos, temp);
+		}
+	}
 	
 	//repeatedly ask the user for an input until a correct input is given
 	//ex: wait until they respond y/n to something before returning answer
@@ -110,7 +133,6 @@ public class Main {
 	
 	public static void ReadThroughDeck() {
 		//init vars
-		CardsManager cardsManager = new CardsManager();
 		FileManager fileManager = new FileManager();
 		Scanner scnr = new Scanner(System.in);
 		
@@ -118,17 +140,17 @@ public class Main {
 		System.out.println("What is the name of the deck you want to load? ('tutorial' for tutorial deck)");
 		String deckname = scnr.nextLine();
 		
-		cardsManager.InitCards(fileManager.loadCards(deckname+"f.txt"), fileManager.loadCards(deckname+"b.txt"));
+		ArrayList<Card> cards = InitCards(fileManager.loadCards(deckname+"f.txt"), fileManager.loadCards(deckname+"b.txt"));
 		
 		
 		//mix up the card order if the user wants to
 		char Mixinput = WaitForAnswer(new char[] {'Y','y','N','n'},"Do you want the cards mixed up? (Y/N)");
 		if(Mixinput == 'Y' || Mixinput == 'y') {
-			cardsManager.ShuffleCards();
+			ShuffleCards(cards);
 		}
 		
 		//loop through every card in the deck to display the front and back
-		for(int i = 0; i < cardsManager.cards.size(); i++) {
+		for(int i = 0; i < cards.size(); i++) {
 			boolean stayOnCard=true;
 			while(stayOnCard) {
 				
@@ -136,7 +158,7 @@ public class Main {
 				System.out.println("");
 				System.out.println("");
 				System.out.println("-----------------------------");
-				System.out.println(cardsManager.cards.get(i).read());
+				System.out.println(cards.get(i).read());
 				System.out.println("-----------------------------");
 				char cardInput = WaitForAnswer(new char[] {'f', 'F', 'n', 'N' }, "To flip type: F. To go to the next card, type: N.");
 				
@@ -144,7 +166,7 @@ public class Main {
 					//flip to next card
 					stayOnCard = false;
 				} else { //they want to flip
-					cardsManager.cards.get(i).flip();
+					cards.get(i).flip();
 				}
 			}
 		}
