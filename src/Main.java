@@ -20,7 +20,7 @@ public class Main {
 			System.out.println("3. Quit");
 			
 			//loop through and run code for the option that they chose
-			switch(WaitForAnswer(new char[] { '1', '2', '3' }, "")) {
+			switch(getSpecificInput(new char[] { '1', '2', '3' }, "")) {
 				case '1':
 					CreateDeck();
 					break;
@@ -59,7 +59,7 @@ public class Main {
 	
 	//repeatedly ask the user for an input until a correct input is given
 	//ex: wait until they respond y/n to something before returning answer
-	public static char WaitForAnswer(char[] answers, String question) {
+	public static char getSpecificInput(char[] answers, String question) {
 		boolean answeredQuestion = false;
 		char answer = 'l';
 		Scanner ansScnr = new Scanner(System.in);
@@ -115,7 +115,7 @@ public class Main {
 			System.out.println("Enter the back of that card: ");
 			backCards.add(scnr.nextLine());
 			
-			char keepGoingInput = WaitForAnswer(new char[] { 'Y', 'y', 'N', 'n' }, "Do you want to keep adding cards? (Y/N): ");
+			char keepGoingInput = getSpecificInput(new char[] { 'Y', 'y', 'N', 'n' }, "Do you want to keep adding cards? (Y/N): ");
 			if(keepGoingInput == 'N' || keepGoingInput == 'n') {
 				stillAddingCards = false;
 			}
@@ -141,7 +141,7 @@ public class Main {
 		
 		
 		//mix up the card order if the user wants to
-		char Mixinput = WaitForAnswer(new char[] {'Y','y','N','n'},"Do you want the cards mixed up? (Y/N)");
+		char Mixinput = getSpecificInput(new char[] {'Y','y','N','n'},"Do you want the cards mixed up? (Y/N)");
 		if(Mixinput == 'Y' || Mixinput == 'y') {
 			ShuffleCards(cards);
 		}
@@ -152,7 +152,7 @@ public class Main {
 			while(stayOnCard) {
 				
 				cards.get(i).print();
-				char cardInput = WaitForAnswer(new char[] {'f', 'F', 'n', 'N' }, "To flip type: F. To go to the next card, type: N.");
+				char cardInput = getSpecificInput(new char[] {'f', 'F', 'n', 'N' }, "To flip type: F. To go to the next card, type: N.");
 				
 				if(cardInput == 'n' || cardInput == 'N') {
 					//flip to next card
